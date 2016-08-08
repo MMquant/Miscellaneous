@@ -2,7 +2,7 @@ function [ varargout ] = tick2bar(dates,price,amount,barlength,bartype,sparse)
 %tick2bar Converts ticks to OHLCV matrix
 %   tick2bar function converts input ticks into OHLCV matrix.
 %   Input
-%       datesin: datetime array
+%       dates: datetime array
 %       price: traded price in tick granularity
 %       amount: volume in tick granularity
 %       barlength: barlength in bartype resolution
