@@ -1,6 +1,22 @@
 function [ varargout ] = tick2bar(dates,price,amount,barlength,bartype,sparse)
 %tick2bar Converts ticks to OHLCV matrix
-%   tick2bar function converts input ticks into OHLCV matrix.
+%
+% Copyright (C) 2015  Petr Javorik  maple@mmquant.net
+%
+%       This program is free software: you can redistribute it and/or modify
+%       it under the terms of the GNU General Public License as published by
+%       the Free Software Foundation, either version 3 of the License, or
+%       any later version.
+%
+%       This program is distributed in the hope that it will be useful,
+%       but WITHOUT ANY WARRANTY; without even the implied warranty of
+%       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%       GNU General Public License for more details.
+%
+%       You should have received a copy of the GNU General Public License
+%       along with this program. If not, see <http://www.gnu.org/licenses/>.
+%
+%
 %   Input
 %       dates: datetime array
 %       price: traded price in tick granularity
@@ -19,11 +35,6 @@ function [ varargout ] = tick2bar(dates,price,amount,barlength,bartype,sparse)
 %   If we want 2min bars we choose barlength = 2 and bartype = 'm'
 %
 %
-%   Written by Maple Mapleson
-%   jvr23@linuxmail.org
-%   
-% 
-
 %% Input variables check
 narginchk(5,6)
 assert(ismember(bartype,{'s','m','h','d','M','Y'}),'Not valid bartype input!');
