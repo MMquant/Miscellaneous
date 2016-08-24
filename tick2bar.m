@@ -34,7 +34,7 @@ function [ varargout ] = tick2bar(dates,price,amount,barlength,bartype,sparse)
 %   Example:
 %   If we want 2min bars we choose barlength = 2 and bartype = 'm'
 %
-%
+
 %% Input variables check
 narginchk(5,6)
 assert(ismember(bartype,{'s','m','h','d','M','Y'}),'Not valid bartype input!');
