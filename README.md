@@ -3,4 +3,5 @@ Various subsidiary tools used for financial data analysis.
 
 Contents:
 
-tick2bar() - Function for tick data aggregation.
+tick2bar.m - Tick data aggregation
+histvol.m - Historical volatility calculation
