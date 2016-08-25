@@ -1,7 +1,7 @@
-# Miscellaneous
-Various subsidiary tools used for financial data analysis.
+# Miscellaneous  
+Various subsidiary tools used for financial data analysis.  
 
-Contents:
+Contents:  
 
-tick2bar.m - Tick data aggregation
-histvol.m - Historical volatility calculation
+tick2bar.m - Tick data aggregation  
+histvol.m - Historical volatility calculation  
