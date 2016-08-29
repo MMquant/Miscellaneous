@@ -2,6 +2,8 @@ function [ sigma_hat ] = histvol( y,k )
 %histvol() Computes historical volatility
 %   histvol() function computes historical volatility given input vector y
 %   and window size k.
+%   Find more info in my article http://mmquant.net/introduction-to-volatility-models/
+
 
 % Petr Javorik (2016) maple@mmquant.net
 
