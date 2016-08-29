@@ -5,6 +5,8 @@ function [ sigma_hat ] = ewma( y,lambda,r_bar )
 %   This function returns variance of logarithmic returns of input series.
 %   Note that we should do a statistical test about H_0 : r_bar = 0 before we
 %   drop the r_bar term from the model.
+%   Find more info in my article http://mmquant.net/introduction-to-volatility-models/
+
 
 % Petr Javorik (2016) maple@mmquant.net
 
