@@ -5,3 +5,4 @@ Contents:
 
 tick2bar.m - Tick data aggregation  
 histvol.m - Historical volatility calculation  
+ewma.m - Exponentially weighted moving average ('variance of returns' version)  
