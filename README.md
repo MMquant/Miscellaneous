@@ -1,9 +1,10 @@
 # Miscellaneous  
 Various subsidiary tools used for financial data analysis.  
 
-Contents:  
+contents:  
 
-tick2bar.m - Tick data aggregation  
-histvol.m - Historical volatility calculation  
-ewma.m - Exponentially weighted moving average ('variance of returns' version)  
-optionparse.m - Parses option chain csv into matlab table  
+tick2bar.m - tick data aggregation  
+histvol.m - historical volatility calculation  
+ewma.m - exponentially weighted moving average ('variance of returns' version)  
+optionparse.m - parses option chain csv into matlab table  
+BCS_secant.m - computes implied volatility using Bharadia-Christopher-Salkin and secant method  
