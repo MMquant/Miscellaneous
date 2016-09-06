@@ -9,10 +9,13 @@ function sigma_hat = PEvol(H,L,k)
 %   k   - rolling window size. integer
 
 % OUTPUT:
-%   out.sigma_hat       - historical volatility estimate
+%   sigma_hat       - historical volatility estimate
 
 
-%   Petr Javorik (2016) maple@mmquant.net   http://mmquant.net/introduction-to-volatility-models/
+%   Petr Javorik (2016) maple@mmquant.net
+
+
+%   http://mmquant.net/introduction-to-volatility-models-with-matlab-sma-ewma-cc-range-estimators/
 
 
 % input check
@@ -24,9 +27,11 @@ sigma_hat = zeros(size(H));
 sqlogdiff = log(H./L).^2;
 for t = k+1:length(H)
     
-    sigma_hat(t,1) = sqrt(1/4*k*log(2) * sum(sqlogdiff(t-k:t-1)));
+    sigma_hat(t,1) = 1/4*k*log(2) * sum(sqlogdiff(t-k:t-1));
     
 end
+
+sigma_hat = sqrt(sigma_hat);
 
 
 end
