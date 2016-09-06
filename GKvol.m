@@ -14,7 +14,10 @@ function sigma_hat = GKvol(O,H,L,Cl,k)
 %   sigma_hat       - historical volatility estimate
 
 
-%   Petr Javorik (2016) maple@mmquant.net   http://mmquant.net/introduction-to-volatility-models/
+%   Petr Javorik (2016) maple@mmquant.net
+
+
+%   http://mmquant.net/introduction-to-volatility-models-with-matlab-sma-ewma-cc-range-estimators/
 
 
 % input check
