@@ -1,7 +1,7 @@
 function out = histvol(y,k,cc)
 %histvol() Computes historical volatility
 %   histvol() function computes historical volatility of logarithmic
-%   returns
+%   returns.
 
 % INPUT:
 %   y   - price time series.
