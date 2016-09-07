@@ -10,9 +10,14 @@ function out = optionparse(path2csv,provider,underlying)
 %                     headers even if they are from same provider)
 
 % OUTPUT:
-%   out - parsed data file to matlab table
+%   out             - parsed data file to matlab table
 
-% Petr Javorik (2016) maple@mmquant.net
+
+%   Petr Javorik (2016) maple@mmquant.net
+
+
+%   http://mmquant.net/introduction-to-volatility-models-iv
+
 
 % Input check
 providers = {'ivolatility'}; % more to be added
