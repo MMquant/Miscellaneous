@@ -21,7 +21,10 @@ function [sigma_secant,sigma_BCS,BS] = BCS_secant(T_t_var,V,S,K,r,type,varargin)
 %   BS              - theoretical option value from BS equation
 
 
-%   Petr Javorik (2016) maple@mmquant.net, http://mmquant.net/introduction-to-volatility-models/
+%   Petr Javorik (2016) maple@mmquant.net
+
+
+%   http://mmquant.net/introduction-to-volatility-models-iv
 
 
 % input check
@@ -45,12 +48,12 @@ sigma_secant = zeros(size(S));
 sigma_BCS = zeros(size(S));
 for t = 1:length(S)
     
-    delta = (1/2)*(S(t) - K*exp(-r*T_t_var(t))); % (6)
-    sigma_BCS(t,1) = sqrt(2*pi-T_t_var(t)) * (V(t)-delta)/(S(t)-delta); % (6)
+    delta = (1/2)*(S(t) - K*exp(-r*T_t_var(t))); % (3)
+    sigma_BCS(t,1) = sqrt(2*pi-T_t_var(t)) * (V(t)-delta)/(S(t)-delta); % (3)
     
 end
 
-% IV computation using secant method (7)
+% IV computation using secant method (4)
 BS = zeros(size(S));
 switch type
     
@@ -59,9 +62,9 @@ switch type
         for t = 1:length(S)
             
             % BS theoretical value for call option
-            d1 = (log(S(t)/K) + (r+1/2*sigma_BCS(t,1)^2)*(T_t_var(t))) / sigma_BCS(t,1)*sqrt(T_t_var(t)); % (5)
+            d1 = (log(S(t)/K) + (r+1/2*sigma_BCS(t,1)^2)*(T_t_var(t))) / sigma_BCS(t,1)*sqrt(T_t_var(t)); % (4)
             d2 = d1 - sigma_BCS(t)*T_t_var(t);
-            BS(t) = S(t)*cdf('normal',d1,0,1) - K*exp(-r*T_t_var(t))*cdf('normal',d2,0,1); % (5) for call option
+            BS(t) = S(t)*cdf('normal',d1,0,1) - K*exp(-r*T_t_var(t))*cdf('normal',d2,0,1); % (4) for call option
             
             % secant method
             err = 1; % Initial error value
@@ -71,16 +74,16 @@ switch type
                 
                 % error update - step 6
                 err = (temp_BS(2,1) - V(t)) * ... 
-                    ((temp_sigma(2,1) - temp_sigma(1,1)) / (temp_BS(2,1) - temp_BS(1,1))); % (7) error corresponding to last computed sigma
+                    ((temp_sigma(2,1) - temp_sigma(1,1)) / (temp_BS(2,1) - temp_BS(1,1))); % (4) error corresponding to last computed sigma
                 
                 % sigma_{i+1} update - step 7
                 temp_sigma(3,1) = temp_sigma(2,1) - err; % new sigma from secant iteration
                 temp_sigma(1) = []; % old sigma no more needed in next loop
                 
                 % BS(sigma_{i+1}) update - step 8
-                d1 = (log(S(t)/K) + (r+1/2*temp_sigma(2,1)^2)*(T_t_var(t))) / temp_sigma(2,1)*sqrt(T_t_var(t)); % (5)
-                d2 = d1 - temp_sigma(2,1)*T_t_var(t); % (5)
-                temp_BS(3,1) = S(t)*cdf('normal',d1,0,1) - K*exp(-r*T_t_var(t))*cdf('normal',d2,0,1); % (5) for call option
+                d1 = (log(S(t)/K) + (r+1/2*temp_sigma(2,1)^2)*(T_t_var(t))) / temp_sigma(2,1)*sqrt(T_t_var(t)); % (2)
+                d2 = d1 - temp_sigma(2,1)*T_t_var(t); % (2)
+                temp_BS(3,1) = S(t)*cdf('normal',d1,0,1) - K*exp(-r*T_t_var(t))*cdf('normal',d2,0,1); % (2) for call option
                 temp_BS(1) = []; % old BS(sigma) no more needed in next loop
                 
             end
@@ -93,9 +96,9 @@ switch type
         for t = 1:length(S)
             
             % BS theoretical value for call option
-            d1 = (log(S(t)/K) + (r+1/2*sigma_BCS(t,1)^2)*(T_t_var(t))) / sigma_BCS(t,1)*sqrt(T_t_var(t)); % (5)
+            d1 = (log(S(t)/K) + (r+1/2*sigma_BCS(t,1)^2)*(T_t_var(t))) / sigma_BCS(t,1)*sqrt(T_t_var(t)); % (2)
             d2 = d1 - sigma_BCS(t)*T_t_var(t);
-            BS(t) = K*exp(-r*T_t_var(t))*cdf('normal',-d2,0,1) - S(t)*cdf('normal',-d1,0,1); % (5) for put option
+            BS(t) = K*exp(-r*T_t_var(t))*cdf('normal',-d2,0,1) - S(t)*cdf('normal',-d1,0,1); % (2) for put option
             
             % secant method
             err = 1; % initial error value
@@ -105,16 +108,16 @@ switch type
                 
                 % error update - step 6
                 err = (temp_BS(2,1) - V(t)) * ...
-                    ((temp_sigma(2,1) - temp_sigma(1,1)) / (temp_BS(2,1) - temp_BS(1,1))); % (7) error corresponding to last computed sigma
+                    ((temp_sigma(2,1) - temp_sigma(1,1)) / (temp_BS(2,1) - temp_BS(1,1))); % (4) error corresponding to last computed sigma
                 
                 % sigma_{i+1} update - step 7
                 temp_sigma(3,1) = temp_sigma(2,1) - err; % new sigma from secant iteration
                 temp_sigma(1) = []; % old sigma no more needed in next loop
                 
                 % BS(sigma_{i+1}) update - step 8
-                d1 = (log(S(t)/K) + (r+1/2*temp_sigma(2,1)^2)*(T_t_var(t))) / temp_sigma(2,1)*sqrt(T_t_var(t)); % (5)
-                d2 = d1 - temp_sigma(2,1)*T_t_var(t); % (5)
-                temp_BS(3,1) = K*exp(-r*T_t_var(t))*cdf('normal',-d2,0,1) - S(t)*cdf('normal',-d1,0,1); % (5) for put option
+                d1 = (log(S(t)/K) + (r+1/2*temp_sigma(2,1)^2)*(T_t_var(t))) / temp_sigma(2,1)*sqrt(T_t_var(t)); % (2)
+                d2 = d1 - temp_sigma(2,1)*T_t_var(t); % (2)
+                temp_BS(3,1) = K*exp(-r*T_t_var(t))*cdf('normal',-d2,0,1) - S(t)*cdf('normal',-d1,0,1); % (2) for put option
                 temp_BS(1) = []; % old BS(sigma) no more needed in next loop
                 
             end
