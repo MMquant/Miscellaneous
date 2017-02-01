@@ -1,5 +1,5 @@
 # Miscellaneous  
-Various subsidiary tools used for financial data analysis.  
+Various utility routines used for financial data analysis.  
 
 contents(sorted by time created):  
 
